@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "stack.h": "c",
+        "list.h": "c",
+        "stdlib.h": "c",
+        "converters.h": "c",
+        "types.h": "c",
+        "signal.h": "c"
+    },
+    "python.pythonPath": "C:\\ProgramData\\Anaconda3\\python.exe"
+}

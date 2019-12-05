@@ -1,0 +1,55 @@
+
+First Name: Anpu
+
+Last Name: Li
+
+NYU ID: al4902
+
+=======================================================================================
+Files submitted:
+
+src
+
+	| File               | Question   |
+	|--------------------|------------|
+	| `q1.c`             | Question 1 |
+	| `q2.c`             | Question 2 |
+	| `bounded_buffer.c` | Question 3 |
+
+txt
+
+To test if the capitalization works
+
+	|  File   | Question     |
+	|---------|--------------|
+	| `file1` | Question 1&2 |
+	| `file2` | Question 1&2 |
+	| `file3` | Question 1&2 |
+	| `file4` | Question 1&2 |
+
+
+=======================================================================================
+Compilation rules in the Makefile:
+
+	| TARGET    | USAGE                              |
+	|-----------|------------------------------------|
+	| `make q1` | compile and run `q1.c`             |
+	| `make q2` | compile and run `q2.c`             |
+	| `make q3` | complie and run `bounded_buffer.c` |
+
+=======================================================================================
+Comments:
+
+### Question 1 - Multi-threaded file conversion - Unlimited number of threads
+
+The solution is pretty simple. We create `NB_FILE` (number of files) threads and each thread is in charge of exactly one file conversion. For example, for thread `t_i`, the file name can be retrived at `argv[1+i]`. This doesn't even need synchronization as there is nothing shared. The filename for conversion is passed as the argument upon thread creation.
+
+### Question 2 - Multi-threaded file conversion - Fixed pool of threads
+
+Similar to question 1, but in this case we actually consider synchronization. When a thread wants to retrieve its task, it needs to set a lock on the shared array that stores all the files and the counter that records how many files are converted. It takes one task if applicable and increment the counter by 1. If there is no more files that need conversion, i.e. `counter == NB_FILE`, the thread exits.
+
+### Question 3 - Bounded buffer with threads
+
+Upon creation, the producer produces its part and wait for a call by consumers when there is nothing left in the stack. The consumer sleeps for one second in order for other consumers to consumer, and notify all producers when there is nothing left and wait for production complete signal.
+
+You can easily uncomment line 152-153 to make consumers only consume once.

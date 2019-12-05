@@ -1,0 +1,6 @@
+*.tgz
+*.o
+*.pdf
+playground/
+bin/
+obj/

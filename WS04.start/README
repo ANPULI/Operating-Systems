@@ -1,0 +1,43 @@
+First Name: Anpu
+
+Last Name: Li
+
+NYU ID: al4902
+
+=======================================================================================
+Files submitted:
+src:
+	p1.c: Question 1
+	waves_old.c: old code, can ignore
+	waves.c: Question 2
+    barrier_old.c: Question 3 implemented using 2 user signals
+    barrier.c: Question 3 implemented using only 1 user signal
+    p4.c: Question 4
+
+=======================================================================================
+Targets in the Makefile:
+
+# make Q1: compile p1.c and run it
+# make Q2: compile waves.c and run it
+# make Q3_old: compile barrier_old.c and run it
+# make Q3: compile barrier.c and run it
+# make Q4: compile p4.c and run it
+# clean: clean binary files
+
+=======================================================================================
+Comments:
+
+For Q3, I have two programs: barrier_old and barrier. The difference is that barrier_old uses
+two signals and barrier uses one. barrier_old is the steady version while barrier may fail
+in situations that signals come in too quickly. 
+
+=======================================================================================
+Textual answers: 
+
+Q3.1:
+    The minimum number of signal sending is 4.
+    Child 1 and child 2 send two signals to the parent after doing calc1() and suspend.
+    Parent send two signals to two children respectively to let them know they can go.
+Q3.2:
+    Yes. In barrier.c, I only use one signal SIGUSR1. It works; however, it may fail when
+    signals coming too quickly -- so nsig only increments by one. 

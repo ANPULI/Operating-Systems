@@ -1,0 +1,31 @@
+First Name: Anpu
+
+Last Name: Li
+
+NYU ID: al4902
+
+=======================================================================================
+Files submitted:
+src:
+	sched-policies.c: Question 1,2,3
+    sched-simulator.c: Question 1,2,3
+
+include:
+	os-scheduling.h: Question 1,2,3
+
+=======================================================================================
+Targets in the Makefile:
+
+# make Q1: run Round Robin
+# make Q2: run MFQ
+# make Q3: run IORR
+
+
+
+
+=======================================================================================
+Comments:
+
+=======================================================================================
+Textual answers: 
+    n/a

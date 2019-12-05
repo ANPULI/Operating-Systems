@@ -64,3 +64,6 @@ void best_fit(int size, freezone* fz);
 /* returns -1 if no free zone is big enough */
 void worst_fit(int size, freezone* fz);
 
+void concat_freezone(int i);
+
+void print_concat_list(int concat_list[], int j);

@@ -17,17 +17,17 @@ void print_heap() {
     
     printf("======== HEAP (FREELIST @%d) ========\n", freelist);
     for (i = 0; i < (HEAP_SIZE / LINESZ); i++) {
-        printf("\033[0;36m");
+        // printf("\033[0;36m");
         for (j = 0; j < LINESZ; j++) {
             printf("\t%3d", j + LINESZ*i);
         }
         printf("\n");
-        printf("\033[0;34m");
+        // printf("\033[0;34m");
         for (j = 0; j < LINESZ; j++) {
             printf("\t%3d", heap[j + LINESZ*i]);
         }
         printf("\n");
-        printf("\033[0m");
+        // printf("\033[0m");
         for (j = 0; j < LINESZ; j++) {
             if (isalnum(heap[j + LINESZ*i])) {
                 printf("\t%3c", heap[j + LINESZ*i]);

@@ -39,7 +39,7 @@ void* heap_malloc(int size) {
     // heap[idx] = size;   // DO IT LATER!!!
 
     // not occupy all remaining space
-    if (size <= heap[idx] - 2) {
+    if (size <= heap[idx] - MIN_BLOCK_SIZE) {
         // set the next free zone
         int next = idx + size + 1;
         heap[next] = heap[idx] - size - 1;

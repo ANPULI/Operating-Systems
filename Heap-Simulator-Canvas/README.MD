@@ -17,6 +17,7 @@ Project requirement: [link](https://docs.google.com/document/d/1DqC6x-DR7s7VsveS
     - [1. first fit](#1-first-fit)
     - [2. best fit](#2-best-fit)
     - [3. worst fit](#3-worst-fit)
+  - [Memory Compaction](#memory-compaction)
 
 ## Memory Allocation
 
@@ -136,3 +137,13 @@ We use an array that stores `freezone` struct of all who have enough size. Then 
 loop through all free zones and return the one where unused space is the maximum
 
 We use an array that stores `freezone` struct of all who have enough size. Then we choose the one with the biggest size as `fz`.
+
+## Memory Compaction
+
+To eliminate external fragmentations, we fist add the following variables and functions for easier use.
+
+| Name                                | Usage                                 |
+|-------------------------------------|---------------------------------------|
+| `char *allocations[]`               | an array that stores all the pointers |
+| `int nb_block`                      | records the number of pointers        |
+| `void remove_allocation(char* ptr)` | remove `ptr` from `allocations`       |

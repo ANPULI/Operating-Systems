@@ -2,6 +2,22 @@
 
 Project requirement: [link](https://docs.google.com/document/d/1DqC6x-DR7s7VsveSVOJKEosnSB010J5PXvQFBBkGel4/edit?usp=sharing).
 
+- [Heap Simulator](#heap-simulator)
+  - [Memory Allocation](#memory-allocation)
+    - [Special Case: Allocated zone does not occupy all space](#special-case-allocated-zone-does-not-occupy-all-space)
+    - [Case 1: freelist is allocated](#case-1-freelist-is-allocated)
+    - [Case 1: freelist is not allocated](#case-1-freelist-is-not-allocated)
+  - [Memory Deallocation](#memory-deallocation)
+    - [Case 1: idx is the new freelist](#case-1-idx-is-the-new-freelist)
+    - [Case 2: idx is not the new freelist](#case-2-idx-is-not-the-new-freelist)
+      - [Subcase 1: there is no free zone except freelist](#subcase-1-there-is-no-free-zone-except-freelist)
+      - [Subcase 2: there is more free zone besides freelist](#subcase-2-there-is-more-free-zone-besides-freelist)
+  - [rdm](#rdm)
+  - [Memory Allocation Strategies](#memory-allocation-strategies)
+    - [1. first fit](#1-first-fit)
+    - [2. best fit](#2-best-fit)
+    - [3. worst fit](#3-worst-fit)
+
 ## Memory Allocation
 
 Given the `result` which is
@@ -95,3 +111,24 @@ it is very complicated to do a backward freezone concatenation
 a sorted-list? not very good idea, too costly
 
 i use a list that stores every freelist and do it backwards.
+
+## Memory Allocation Strategies
+
+### 1. first fit
+
+loop through all free zones and return the first one that has enough size
+
+```c
+found = freelist
+while size of found list < required size:
+  found = next freezone
+  prev = found
+```
+
+### 2. best fit
+
+loop through all free zones and return the one where unused space is the minimum
+
+### 3. worst fit
+
+loop through all free zones and return the one where unused space is the maximum

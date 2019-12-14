@@ -57,6 +57,12 @@ We can divide into three cases.
 
 Assume `idx` is the index of the zone to be freed, `size` is its size.
 
+We add a function here as a helper
+
+| Name                            | Usage                                                               |
+|---------------------------------|---------------------------------------------------------------------|
+| `void concat_freezone(int idx)` | check if idx's next free zone is contiguous with it and merge if so |
+
 ### Case 1: `idx` is the new `freelist`
 
 Two scenarios will lead to this case:

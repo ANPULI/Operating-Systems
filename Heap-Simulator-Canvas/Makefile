@@ -1,9 +1,9 @@
 CFLAGS=-Iinclude -Wall
 
 #To run with a different memory allocation strategy, uncomment the corresponding line
-STRATEGY= FIRSTFIT
-#STRATEGY= BESTFIT
-#STRATEGY= WORSTFIT
+# STRATEGY= FIRSTFIT
+# STRATEGY= BESTFIT
+STRATEGY= WORSTFIT
 
 all: build run
 

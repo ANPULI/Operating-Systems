@@ -19,32 +19,43 @@ void best_fit(int size, freezone* fz) {
     int found = freelist;
     int previous = -1;
     int i = 0;
-    freezone* fzs[HEAP_SIZE/MIN_BLOCK_SIZE];
+    freezone fzs[HEAP_SIZE/MIN_BLOCK_SIZE];
 
+    // printf("break point 1\n");
     while (found != -1) {
         if (heap[found] >= size) {
-            fz->previous = previous;
-            fz->found = found;
-            fzs[i] = fz;
+            /* same pointer!! big mistake*/
+            // fz->previous = previous;
+            // fz->found = found;
+            // fzs[i] = fz;
+            fzs[i].previous = previous;
+            fzs[i].found = found;
             i++;
         }
         previous = found;
         found = heap[found+1];
     }
+    // printf("break point 2\n");
 
+    printf("i = %d\n", i);
     if (i == 0) {
         fz->previous = previous;
         fz->found = found;
     } else {
-        fz = fzs[i];
+        *fz = fzs[--i];
         i--;
+        printf("i = %d\n", i);
+
         while (i >= 0) {
-            if (heap[fz->found] >= heap[fzs[i]->found]) {
-                fz = fzs[i];
+            printf("%d\t%d\n", fz->found, fzs[i].found);
+            if (heap[fz->found] >= heap[fzs[i].found]) {
+                *fz = fzs[i];
             }
             i--;
         }
     }
+    printf("i = %d\n", i);
+    // printf("break point 3\n");
 }
 
 void worst_fit(int size, freezone* fz) {
@@ -52,32 +63,39 @@ void worst_fit(int size, freezone* fz) {
     int found = freelist;
     int previous = -1;
     int i = 0;
-    freezone* fzs[HEAP_SIZE/MIN_BLOCK_SIZE];
+    freezone fzs[HEAP_SIZE/MIN_BLOCK_SIZE];
 
+    // printf("break point 1\n");
     while (found != -1) {
         if (heap[found] >= size) {
-            fz->previous = previous;
-            fz->found = found;
-            fzs[i] = fz;
+            fzs[i].previous = previous;
+            fzs[i].found = found;
             i++;
         }
         previous = found;
         found = heap[found+1];
     }
+    // printf("break point 2\n");
 
+    printf("i = %d\n", i);
     if (i == 0) {
         fz->previous = previous;
         fz->found = found;
     } else {
-        fz = fzs[i];
+        *fz = fzs[--i];
         i--;
+        printf("i = %d\n", i);
+
         while (i >= 0) {
-            if (heap[fz->found] <= heap[fzs[i]->found]) {
-                fz = fzs[i];
+            printf("%d\t%d\n", fz->found, fzs[i].found);
+            if (heap[fz->found] <= heap[fzs[i].found]) {
+                *fz = fzs[i];
             }
             i--;
         }
     }
+    printf("i = %d\n", i);
+    // printf("break point 3\n");
 }
 
 
@@ -93,6 +111,9 @@ void* heap_malloc(int size) {
         return NULL;
     
     // TODO
+
+    printf("found: %d\t previous: %d\n", result.found, result.previous);
+
     int idx = result.found, prev = result.previous;
     // heap[idx] = size;   // DO IT LATER!!!
 

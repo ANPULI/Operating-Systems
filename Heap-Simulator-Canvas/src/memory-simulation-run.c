@@ -8,7 +8,7 @@ void run_simulation() {
     char *p1, *p2, *p3, *p4;
     p1 = (char*) heap_malloc(10);
     strcpy(p1, "v1");
-    print_heap();
+    // print_heap();
     p2 = (char*) heap_malloc(9);
     strcpy(p2, "v2");
     p3 = (char*) heap_malloc(5);

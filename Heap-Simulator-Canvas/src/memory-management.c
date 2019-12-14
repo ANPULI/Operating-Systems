@@ -112,6 +112,8 @@ void* heap_malloc(int size) {
     
     // TODO
     if (heap[result.found] == HEAP_SIZE - 1) {
+        // check if the whole heap is empty as we cannot modify simulator...
+        // can be improved by modifying init_heap()
         nb_block = 0;
     }
 

@@ -111,6 +111,9 @@ void* heap_malloc(int size) {
         return NULL;
     
     // TODO
+    if (heap[result.found] == HEAP_SIZE - 1) {
+        nb_block = 0;
+    }
 
     printf("found: %d\t previous: %d\n", result.found, result.previous);
 

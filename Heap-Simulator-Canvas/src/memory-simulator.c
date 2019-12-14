@@ -8,7 +8,7 @@ void init_heap() {
     heap[0] = HEAP_SIZE - 1;
     heap[1] = -1;
     freelist = 0;
-    nb_block = 0;
+    // nb_block = 0;
 }
 
 

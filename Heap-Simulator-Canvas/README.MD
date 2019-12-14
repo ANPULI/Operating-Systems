@@ -148,8 +148,9 @@ We use an array that stores `freezone` struct of all who have enough size. Then 
 
 To eliminate external fragmentations, we fist add the following variables and functions for easier use.
 
-| Name                                | Usage                                 |
-|-------------------------------------|---------------------------------------|
-| `char *allocations[]`               | an array that stores all the pointers |
-| `int nb_block`                      | records the number of pointers        |
-| `void remove_allocation(char* ptr)` | remove `ptr` from `allocations`       |
+| Name                                | Usage                                        |
+|-------------------------------------|----------------------------------------------|
+| `char *allocations[]`               | an array that stores all the pointers        |
+| `int nb_block`                      | records the number of pointers               |
+| `void add_allocation(char* ptr)`    | add `ptr` to `allocations` ordering by index |
+| `void remove_allocation(char* ptr)` | remove `ptr` from `allocations`              |

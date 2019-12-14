@@ -129,6 +129,10 @@ while size of found list < required size:
 
 loop through all free zones and return the one where unused space is the minimum
 
+We use an array that stores `freezone` struct of all who have enough size. Then we choose the one with the smallest size as `fz`.
+
 ### 3. worst fit
 
 loop through all free zones and return the one where unused space is the maximum
+
+We use an array that stores `freezone` struct of all who have enough size. Then we choose the one with the biggest size as `fz`.

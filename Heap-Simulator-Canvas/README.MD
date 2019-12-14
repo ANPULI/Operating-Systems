@@ -15,43 +15,24 @@ struct {
 
 We let `idx = result.found` and `prev = result.previous` to simplify coding.
 
-We need to check if freelist is idx to see if we need to reset freelist.
-
-### `freelist` is allocated
-
-set `freelist` as `heap[idx+1]` (the next freezone)
-
-### `freelist` is not allocated
-
-set `heap[prev+1]` as `heap[idx+1]`
-
-the next freezone of the previous free should be the next free zone this allocated zone.
-
-make a graph here
-
 ### Special Case: Allocated zone does not occupy all space
 
 We compare `size` with `heap[idx] - MIN_BLOCK_SIZE` first need to check if the allocated zone needs all space.
 
 If `size < heap[idx] - MIN_BLOCK_SIZE`, we need to set the new free zone. If not, we can jump to the [normal operation](#normal-operation).
 
-```c
-set the size of the new free zone
-set
-```
+Then we need to check if `freelist == idx` to see if we need to reset `freelist`.
 
-### Normal Operation
+### Case 1: `freelist` is allocated
 
-1. if not occupy all space (size <= heap[idx] - MIN_BLOCK_SIZE) (the minimum is 2)
-   - set new free zone
-   - heap[idx+1] = idx + size + 1
-   - more code going
-   - goto 2
-2. if occupy all space
-   - if (prev == -1)     freelist == idx
-     - freelist = heap[idx+1]
-   - else
-     - heap[prev+1] = heap[idx+1]
+set `freelist` as `heap[idx+1]` (the next freezone)
+
+### Case 1: `freelist` is not allocated
+
+set `heap[prev+1]` as `heap[idx+1]` (the next freezone of the previous free zone should be the next free zone of this allocated zone)
+
+
+:warning: TODO: make a graph
 
 ## Memory Deallocation
 

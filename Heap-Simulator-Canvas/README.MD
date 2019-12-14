@@ -55,6 +55,46 @@ set
 
 ## Memory Deallocation
 
+We can divide into three cases.
+
+Assume `idx` is the index of the zone to be freed, `size` is its size.
+
+### Case 1: `idx` is the new `freelist`
+
+Two scenarios will lead to this case:
+
+1. `idx` is left to `freelist`
+2. `freelist` is -1 (there is no free zone)
+
+In such case, what we do is to
+
+1. point `heap[idx+1]` to `freelist`
+2. set `freelist` to `idx`
+3. merge if contiguous
+
+### Case 2: `idx` is not the new `freelist`
+
+We know that `idx` must be right to `freelist`, and `freelist` is not -1. There are two subcases as follows.
+
+#### Subcase 1: there is no free zone except `freelist`
+
+We can tell that `heap[freelist+1]` is -1 because there is no other free zone. We therefore
+
+1. set `heap[idx+1]` to -1
+2. point `heap[freelist+1]` to `idx`
+3. merge if contiguous
+
+#### Subcase 2: there is more free zone besides `freelist`
+
+We use a `concat_list` that stores the indexes of all free zones until the first free zone (including) after `idx`, the zone to be freed.
+
+1. set `heap[idx+1]` to the next free zone (-1 if no free zone after `idx`)
+2. point the zone before `idx` to `idx`
+3. merge if contiguous, starting from the back of `concat_list` in a loop
+
+## rdm
+
+
 1. find next free zone
    - `heap[idx+1]` should be set to the index of next free zone
    - use `freelist` to find the next free zone

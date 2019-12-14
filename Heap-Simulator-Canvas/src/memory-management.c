@@ -106,7 +106,7 @@ int heap_free(void *dz) {
         return 0;
     } 
 
-    // 2. there is a freelist besides freelist
+    // 2. there is a freezone besides freelist
     // use freelist to find next free zone
     // loop through the heap
     int j = 1, prev, concat_list[HEAP_SIZE/MIN_BLOCK_SIZE];

@@ -137,21 +137,27 @@ void* heap_malloc(int size) {
     printf("Setting the size: %d\n", size);
 
 
-    ptr = (void *) (&heap[idx+1]);   // set pointer
-
-    return ptr;
+    ptr = (&heap[idx+1]);   // set pointer
+    allocations[nb_block] = ptr;
+    nb_block++;
+    print_allocations();
+    return (void*) ptr;
 }
 
 
 int heap_free(void *dz) {
     // TODO
 
+    // remove allocation
+    remove_allocation((char*) dz);
+    print_allocations();
+
     // simply set the current area as free, does not consider previous/next
     //  ----sp0000----    s:size, p:next
     
     // clean the zone
     int idx = ptr2ind(dz) - 1;
-    printf("idx: %d\n", idx);
+    // printf("idx: %d\n", idx);
     int size = heap[idx];
     int i;
     // clean up 
@@ -198,7 +204,7 @@ int heap_free(void *dz) {
         j ++;
         i = heap[i+1];
     }
-    print_concat_list(concat_list, j);
+    // print_concat_list(concat_list, j);
     if (heap[i+1] == -1) {
         // no free zone after idx               // idx is the last
         j--;
@@ -222,7 +228,7 @@ int heap_free(void *dz) {
         j++;
         concat_list[j] = concat_list[j-1];
         concat_list[j-1] = idx;
-        print_concat_list(concat_list, j);
+        // print_concat_list(concat_list, j);
         printf("the next @22: %d\n", heap[22]);
         while (j >= 0) {
             concat_freezone(concat_list[j]);
@@ -255,4 +261,27 @@ void print_concat_list(int concat_list[], int j) {
         printf("concat list[%d]: %d\n", j, concat_list[j]);
         j--;
     }
+}
+
+void remove_allocation(char* ptr) {
+    int i;
+    for (i = 0; i < nb_block; i++) {
+        if (ptr == allocations[i]) {
+            break;
+        }
+    }
+    while (i < nb_block - 1) {
+        allocations[i] = allocations[i+1];
+        i++;
+    }
+    nb_block--;
+}
+
+void print_allocations() {
+    printf("-----print allocations-----\n");
+    int i;
+    for (i = 0; i < nb_block; i++) {
+        printf("pointer %d @ %d \t", i, ptr2ind(allocations[i]));
+    }
+    printf("\n");
 }

@@ -16,10 +16,68 @@ void first_fit(int size, freezone* fz) {
 
 void best_fit(int size, freezone* fz) {
     // TODO
+    int found = freelist;
+    int previous = -1;
+    int i = 0;
+    freezone* fzs[HEAP_SIZE/MIN_BLOCK_SIZE];
+
+    while (found != -1) {
+        if (heap[found] >= size) {
+            fz->previous = previous;
+            fz->found = found;
+            fzs[i] = fz;
+            i++;
+        }
+        previous = found;
+        found = heap[found+1];
+    }
+
+    if (i == 0) {
+        fz->previous = previous;
+        fz->found = found;
+    } else {
+        fz = fzs[i];
+        i--;
+        while (i >= 0) {
+            if (heap[fz->found] >= heap[fzs[i]->found]) {
+                fz = fzs[i];
+            }
+            i--;
+        }
+    }
 }
 
 void worst_fit(int size, freezone* fz) {
     // TODO
+    int found = freelist;
+    int previous = -1;
+    int i = 0;
+    freezone* fzs[HEAP_SIZE/MIN_BLOCK_SIZE];
+
+    while (found != -1) {
+        if (heap[found] >= size) {
+            fz->previous = previous;
+            fz->found = found;
+            fzs[i] = fz;
+            i++;
+        }
+        previous = found;
+        found = heap[found+1];
+    }
+
+    if (i == 0) {
+        fz->previous = previous;
+        fz->found = found;
+    } else {
+        fz = fzs[i];
+        i--;
+        while (i >= 0) {
+            if (heap[fz->found] <= heap[fzs[i]->found]) {
+                fz = fzs[i];
+            }
+            i--;
+        }
+    }
 }
 
 

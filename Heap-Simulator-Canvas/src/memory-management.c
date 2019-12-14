@@ -137,9 +137,8 @@ void* heap_malloc(int size) {
     printf("Setting the size: %d\n", size);
 
 
-    ptr = (&heap[idx+1]);   // set pointer
-    allocations[nb_block] = ptr;
-    nb_block++;
+    ptr = &heap[idx+1];   // set pointer
+    add_allocation(ptr);
     print_allocations();
     return (void*) ptr;
 }
@@ -261,6 +260,20 @@ void print_concat_list(int concat_list[], int j) {
         printf("concat list[%d]: %d\n", j, concat_list[j]);
         j--;
     }
+}
+
+void add_allocation(char* ptr) {
+    int i = 0, j;
+    while ((ptr > allocations[i]) && (i < nb_block)) {
+        i++;
+    }
+
+    for (j = nb_block; j > i; j--) {
+        allocations[j] = allocations[j-1];
+    }
+    allocations[i] = ptr;
+
+    nb_block++;
 }
 
 void remove_allocation(char* ptr) {

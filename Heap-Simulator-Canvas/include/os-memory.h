@@ -69,6 +69,8 @@ void concat_freezone(int i);
 
 void print_concat_list(int concat_list[], int j);
 
+void add_allocation(char* ptr);
+
 void remove_allocation(char* ptr);
 
 void print_allocations();

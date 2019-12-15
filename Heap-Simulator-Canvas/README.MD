@@ -77,7 +77,9 @@ We let `idx = result.found` and `prev = result.previous` to simplify coding.
 
 We compare `size` with `heap[idx] - MIN_BLOCK_SIZE` first need to check if the allocated zone needs all space.
 
-If `size < heap[idx] - MIN_BLOCK_SIZE`, we need to set the new free zone. If not, we can jump to the [normal operation](#normal-operation).
+If `size < heap[idx] - MIN_BLOCK_SIZE`, we need to set the new free zone. If not, we can skip the procedure.
+
+![image](https://user-images.githubusercontent.com/26131764/70861023-b5c48500-1f63-11ea-8261-ca96d0ad8d68.png)
 
 Then we need to check if `freelist == idx` to see if we need to reset `freelist`.
 
@@ -89,7 +91,7 @@ set `freelist` as `heap[idx+1]` (the next freezone)
 
 set `heap[prev+1]` as `heap[idx+1]` (the next freezone of the previous free zone should be the next free zone of this allocated zone)
 
-![image](https://user-images.githubusercontent.com/26131764/70860306-2dda7d00-1f5b-11ea-9d05-94ca71b18c87.png)
+![image](https://user-images.githubusercontent.com/26131764/70860935-72b5e200-1f62-11ea-9446-ff7eceaec20f.png)
 
 ## Memory Deallocation
 

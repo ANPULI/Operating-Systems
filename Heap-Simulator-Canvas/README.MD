@@ -19,7 +19,7 @@ For full project requirement, please refer to this [link](https://docs.google.co
   - [Memory Allocation](#memory-allocation)
     - [Special Case: Allocated zone does not occupy all space](#special-case-allocated-zone-does-not-occupy-all-space)
     - [Case 1: freelist is allocated](#case-1-freelist-is-allocated)
-    - [Case 1: freelist is not allocated](#case-1-freelist-is-not-allocated)
+    - [Case 2: freelist is not allocated](#case-2-freelist-is-not-allocated)
   - [Memory Deallocation](#memory-deallocation)
     - [Case 1: idx is the new freelist](#case-1-idx-is-the-new-freelist)
     - [Case 2: idx is not the new freelist](#case-2-idx-is-not-the-new-freelist)
@@ -58,7 +58,6 @@ This section covers the use of every `c` file in `src/`. To make more changes, p
 | `memory-simulation-run.c` | This file contains the simulation to be performed. You can play with different input to have different outputs |
 | `memory-simulator.c` | This file contains the logical flow. You may don't want to modify this file.|
 
-
 You can modify `src/memory-simulation-run.c` to make more changes.
 
 ## Memory Allocation
@@ -86,12 +85,11 @@ Then we need to check if `freelist == idx` to see if we need to reset `freelist`
 
 set `freelist` as `heap[idx+1]` (the next freezone)
 
-### Case 1: `freelist` is not allocated
+### Case 2: `freelist` is not allocated
 
 set `heap[prev+1]` as `heap[idx+1]` (the next freezone of the previous free zone should be the next free zone of this allocated zone)
 
-
-:warning: TODO: make a graph
+![image](https://user-images.githubusercontent.com/26131764/70860306-2dda7d00-1f5b-11ea-9d05-94ca71b18c87.png)
 
 ## Memory Deallocation
 

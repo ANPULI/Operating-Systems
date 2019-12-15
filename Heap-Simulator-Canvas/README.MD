@@ -12,7 +12,7 @@ Project requirement: [link](https://docs.google.com/document/d/1DqC6x-DR7s7VsveS
     - [Case 2: idx is not the new freelist](#case-2-idx-is-not-the-new-freelist)
       - [Subcase 1: there is no free zone except freelist](#subcase-1-there-is-no-free-zone-except-freelist)
       - [Subcase 2: there is more free zone besides freelist](#subcase-2-there-is-more-free-zone-besides-freelist)
-  - [rdm](#rdm)
+        - [Implementation of int concat_list[]](#implementation-of-int-concat_list)
   - [Memory Allocation Strategies](#memory-allocation-strategies)
     - [1. first fit](#1-first-fit)
     - [2. best fit](#2-best-fit)
@@ -61,7 +61,7 @@ We add a function here as a helper
 
 | Name                            | Usage                                                               |
 |---------------------------------|---------------------------------------------------------------------|
-| `void concat_freezone(int idx)` | check if idx's next free zone is contiguous with it and merge if so |
+| `void concat_freezone(int idx)` | check if `idx`'s next free zone is contiguous with it and merge if so |
 
 ### Case 1: `idx` is the new `freelist`
 
@@ -75,49 +75,44 @@ In such case, what we do is to
 1. point `heap[idx+1]` to `freelist`
 2. set `freelist` to `idx`
 3. merge if contiguous
+   - `cancat_freezone(idx)`
 
 ### Case 2: `idx` is not the new `freelist`
 
-We know that `idx` must be right to `freelist`, and `freelist` is not -1. There are two subcases as follows.
+We know that `idx` must be right to `freelist`, and `freelist != -1`. There are two subcases as follows.
 
 #### Subcase 1: there is no free zone except `freelist`
 
-We can tell that `heap[freelist+1]` is -1 because there is no other free zone. We therefore
+We can tell that `heap[freelist+1] == -1` because there is no other free zone. We therefore
 
 1. set `heap[idx+1]` to -1
 2. point `heap[freelist+1]` to `idx`
 3. merge if contiguous
+   - `concat_freezone(idx)`
 
 #### Subcase 2: there is more free zone besides `freelist`
 
 We use a `concat_list` that stores the indexes of all free zones until the first free zone (including) after `idx`, the zone to be freed.
 
+##### Implementation of `int concat_list[]`
+
+We start from `i = freelist`: 
+
+1. add `i` to `concat_list`
+2. check if `heap[i+1] > idx`
+   1. `heap[i+1] > idx`: add `heap[i+1]` to `concat_list`, exit the loop
+   2. `heap[i+1] < idx`: add `heap[i+1]` to `concat_list`, continue the loop, set `i = heap[i+1]`
+
+| Name                | Usage                                                          |
+|---------------------|----------------------------------------------------------------|
+| `int concat_list[]` | stores the indexes of all free zones that may be able to merge |
+
+After we have the `concat_list`, we follow this procedure
+
 1. set `heap[idx+1]` to the next free zone (-1 if no free zone after `idx`)
-2. point the zone before `idx` to `idx`
-3. merge if contiguous, starting from the back of `concat_list` in a loop
-
-## rdm
-
-
-1. find next free zone
-   - `heap[idx+1]` should be set to the index of next free zone
-   - use `freelist` to find the next free zone
-   - freelist always the leftmost
-   - if (idx < freelist) or (freelist == -1) --> you are the freelist
-     - `heap[idx+1] = freelist`
-   - else
-     - loop through the heap using free list to find the next freezone
-   - if the freezones are successive
-     - concat
-
-
-current status
-
-it is very complicated to do a backward freezone concatenation
-
-a sorted-list? not very good idea, too costly
-
-i use a list that stores every freelist and do it backwards.
+2. let `prev` be the first free zone that precedes `idx`, set `heap[prev+1]` to `idx`
+3. starting from the back of `concat_list` in a loop, let the iterator be `j`
+   - `concat_list(j)`
 
 ## Memory Allocation Strategies
 

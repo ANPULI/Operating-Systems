@@ -1,5 +1,12 @@
 # Heap Simulator
 
+|      Field | Value      |
+|-----------:|:-----------|
+| First Name | Anpu       |
+|  Last Name | Li         |
+|     NYU ID | al4902     |
+|       Date | 12/15/2019 |
+
 This project mocks the behavior of a heap using the C language. It simulates the following four features
 
 1. [Memory Allocation](#memory-allocation)

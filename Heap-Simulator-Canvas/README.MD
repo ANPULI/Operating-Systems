@@ -67,6 +67,12 @@ This section covers the use of every `c` file in `src/`. To make more changes, p
 
 You can modify `src/memory-simulation-run.c` to make more changes.
 
+This is the file in `include/`
+
+| File Name  | Usage  |
+|---|---|
+| `os-memory.c`  | This file contains the primitives and macros. You may not change it. |
+
 ## Memory Allocation
 
 Given the `result` which is

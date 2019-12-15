@@ -2,10 +2,10 @@
 
 This project mocks the behavior of a heap using the C language. It simulates the following four features
 
-1. Memory Allocation
-2. Memory Deallocation
-3. Memory Alocation Strategies
-4. Memory Compaction
+1. [Memory Allocation](#memory-allocation)
+2. [Memory Deallocation](#memory-deallocation)
+3. [Memory Allocation Strategies](#memory-allocation-strategies)
+4. [Memory Compaction](#memory-compaction)
 
 For full project requirement, please refer to this [link](https://docs.google.com/document/d/1DqC6x-DR7s7VsveSVOJKEosnSB010J5PXvQFBBkGel4/edit?usp=sharing).
 

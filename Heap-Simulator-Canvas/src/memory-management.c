@@ -229,12 +229,12 @@ int heap_free(void *dz) {
         prev = concat_list[j-1];
         heap[prev+1] = idx;
 
-        printf("heap[idx+1]: %d\n", heap[idx+1]);
+        // printf("heap[idx+1]: %d\n", heap[idx+1]);
         j++;
         concat_list[j] = concat_list[j-1];
         concat_list[j-1] = idx;
         // print_concat_list(concat_list, j);
-        printf("the next @22: %d\n", heap[22]);
+        // printf("the next @22: %d\n", heap[22]);
         while (j >= 0) {
             concat_freezone(concat_list[j]);
             j--;
@@ -256,16 +256,16 @@ int heap_defrag() {
     for (i = 0; i < nb_block; i++) {
         offset = ((int) ((void*)*allocations[i] - (void*)&heap[j])) - 1;
         size = heap[ptr2ind(*allocations[i])-1];
-        printf("size: %d\t offest: %d\n", size, offset);
-        printf("before: \t *allocations[%d]: %d\n", i, *allocations[i]);
-        printf("allocations[%d]: %d\n", i, allocations[i]);
+        // printf("size: %d\t offest: %d\n", size, offset);
+        // printf("before: \t *allocations[%d]: %d\n", i, *allocations[i]);
+        // printf("allocations[%d]: %d\n", i, allocations[i]);
         *(allocations[i]) = &heap[j+1];
-        printf("after: \t *allocations[%d]: %d\n", i, *allocations[i]);
-        printf("allocations[%d]: %d\n", i, allocations[i]);
+        // printf("after: \t *allocations[%d]: %d\n", i, *allocations[i]);
+        // printf("allocations[%d]: %d\n", i, allocations[i]);
         // printf("check\n");
 
         for (k = 0; k < size + 1; k++, j++) {
-            printf("heap[j+offset]: %d\n",heap[j+offset]);
+            // printf("heap[j+offset]: %d\n",heap[j+offset]);
             heap[j] = heap[j+offset];
             // printf("%d\n", j);
         }
@@ -296,7 +296,7 @@ void print_concat_list(int concat_list[], int j) {
 }
 
 void add_allocation(char** ptr) {
-    printf("---add allocation---\n");
+    // printf("---add allocation---\n");
     int i = 0, j;
     while ((i < nb_block) && (*ptr > *allocations[i])) {
         i++;
@@ -320,7 +320,7 @@ void remove_allocation(char** ptr) {
         // printf("%d\t %d\n", ptr, *allocations[i]);
         // printf("%d\t %d\n", ptr2ind(ptr), ptr2ind(*allocations[i]));
         if (*ptr == *allocations[i]) {
-            printf("ptr: %d\n", ptr2ind(*ptr));
+            // printf("ptr: %d\n", ptr2ind(*ptr));
             break;
         }
     }

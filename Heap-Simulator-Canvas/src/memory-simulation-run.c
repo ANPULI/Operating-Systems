@@ -27,8 +27,8 @@ void run_simulation() {
     print_allocations();
     print_heap();
 
-    heap_defrag();
-    print_heap();
+    // heap_defrag();
+    // print_heap();
 
     p4 = (char*) heap_malloc(7);
     add_allocation(&p4);
@@ -42,8 +42,8 @@ void run_simulation() {
     print_heap();
     printf("%s\n", p4);
 
-    heap_defrag();
-    print_heap();
+    // heap_defrag();
+    // print_heap();
     
     printf("End simulation\n");
 }

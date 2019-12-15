@@ -190,7 +190,7 @@ while found != -1:
 
 ### 3. worst fit
 
-loop through all free zones and return the one where unused space is the maximum
+This is very similar to `best fit`, the only difference is to return the one where unused space is the maximum.
 
 We use an array that stores `freezone` struct of all who have enough size. Then we choose the one with the biggest size as `fz`.
 

@@ -1,8 +1,21 @@
 # Heap Simulator
 
-Project requirement: [link](https://docs.google.com/document/d/1DqC6x-DR7s7VsveSVOJKEosnSB010J5PXvQFBBkGel4/edit?usp=sharing).
+This project mocks the behavior of a heap using the C language. It simulates the following four features
+
+1. Memory Allocation
+2. Memory Deallocation
+3. Memory Alocation Strategies
+4. Memory Compaction
+
+For full project requirement, please refer to this [link](https://docs.google.com/document/d/1DqC6x-DR7s7VsveSVOJKEosnSB010J5PXvQFBBkGel4/edit?usp=sharing).
+
+## Table of Contents
 
 - [Heap Simulator](#heap-simulator)
+  - [Table of Contents](#table-of-contents)
+  - [User Manual](#user-manual)
+    - [Demo](#demo)
+    - [Workflow](#workflow)
   - [Memory Allocation](#memory-allocation)
     - [Special Case: Allocated zone does not occupy all space](#special-case-allocated-zone-does-not-occupy-all-space)
     - [Case 1: freelist is allocated](#case-1-freelist-is-allocated)
@@ -18,6 +31,35 @@ Project requirement: [link](https://docs.google.com/document/d/1DqC6x-DR7s7VsveS
     - [2. best fit](#2-best-fit)
     - [3. worst fit](#3-worst-fit)
   - [Memory Compaction](#memory-compaction)
+
+## User Manual
+
+### Demo
+
+To see how this works, simply execute the following commands
+
+```shell
+git clone https://github.com/ANPULI/Operating-Systems.git
+cd Heap-Simulator-Canvas
+make
+```
+
+The default behavior will use `first fit` as the allocation strategy, and the output should be the same as `output.txt`.
+
+You can open `makefile` and comment/uncomment corresponding lines to see `best fit` and `worst fit`.
+
+### Workflow
+
+This section covers the use of every `c` file in `src/`. To make more changes, please refer to this section carefully.
+
+| File Name  | Usage  |
+|---|---|
+| `memory-management.c`  | This is the most important file of the simulator. It implements all the features. You may want to refer to the following sections to understand what the code inside does  |
+| `memory-simulation-run.c` | This file contains the simulation to be performed. You can play with different input to have different outputs |
+| `memory-simulator.c` | This file contains the logical flow. You may don't want to modify this file.|
+
+
+You can modify `src/memory-simulation-run.c` to make more changes.
 
 ## Memory Allocation
 

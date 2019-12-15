@@ -24,7 +24,8 @@ typedef struct {
 
 char heap[HEAP_SIZE];                           /* Array representation of the heap */
 int freelist;                                   /* List of free memory zones */
-char *allocations[HEAP_SIZE/MIN_BLOCK_SIZE];    /* List of allocated memory zones */
+char **allocations[HEAP_SIZE/MIN_BLOCK_SIZE];    /* List of allocated memory zones */
+char** alloc[HEAP_SIZE/MIN_BLOCK_SIZE];  // my usage
 int nb_block;
 
 /* ptr2ind translates the address of a pointer into its index value in the heap array */
@@ -69,8 +70,8 @@ void concat_freezone(int i);
 
 void print_concat_list(int concat_list[], int j);
 
-void add_allocation(char* ptr);
+void add_allocation(char** ptr);
 
-void remove_allocation(char* ptr);
+void remove_allocation(char** ptr);
 
 void print_allocations();

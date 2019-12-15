@@ -173,6 +173,21 @@ loop through all free zones and return the one where unused space is the minimum
 
 We use an array that stores `freezone` struct of all who have enough size. Then we choose the one with the smallest size as `fz`.
 
+| Name                                 | Usage                                        |
+|--------------------------------------|----------------------------------------------|
+| `freezone fzs[]`                     | stores all free zones with enough size       |
+
+To get `fzs`, we follow this procedure
+
+```c
+prev = -1; found = freelist;
+while found != -1:
+  if size > required:
+    add fz {found, prev} to fzs
+  found = next
+  prev = found
+```
+
 ### 3. worst fit
 
 loop through all free zones and return the one where unused space is the maximum

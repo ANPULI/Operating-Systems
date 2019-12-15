@@ -148,9 +148,13 @@ We use an array that stores `freezone` struct of all who have enough size. Then 
 
 To eliminate external fragmentations, we fist add the following variables and functions for easier use.
 
-| Name                                | Usage                                        |
-|-------------------------------------|----------------------------------------------|
-| `char *allocations[]`               | an array that stores all the pointers        |
-| `int nb_block`                      | records the number of pointers               |
-| `void add_allocation(char* ptr)`    | add `ptr` to `allocations` ordering by index |
-| `void remove_allocation(char* ptr)` | remove `ptr` from `allocations`              |
+| Name                                 | Usage                                        |
+|--------------------------------------|----------------------------------------------|
+| `char **allocations[]`               | an array that stores the pointers to all the pointers |
+| `int nb_block`                       | records the number of pointers               |
+| `void add_allocation(char** ptr)`    | add `ptr` to `allocations` ordering by index |
+| `void remove_allocation(char** ptr)` | remove `ptr` from `allocations`              |
+
+We have to call `add_allocation(&p)` and `remove_allocation(&p)` in the `memory-simulator-run` because we want to change the pointer itself, i.e. its address. There is no other way that we can have this pointer stored. 
+
+Basically, this design keeps track of every pointer and stores them in an array, ordering by their indexes. When there is a new zone allocated to a pointer, we loop through `allocations` to find its place and insert it there. When we free, that pointer is removed from `allocations`. When we defragement the heap, things then get easier. We start from the first pointer in `allocations`, and move the corresponding data to the beginning of the heap. Then, we apply the same procedure to the following pointers. Last, all remaining space in the heap becomes a single free zone.
